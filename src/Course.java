@@ -1,18 +1,25 @@
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+
 
 public class Course {
+    @SerializedName("CRN")
     private int CRN;
-    private static String Subject;
+    private String Subject;
     private int Number;
     private String Title;
     private String Section;
     private String Type;
     private int Term;
-    private static String Instructor;
+    private String Instructor;
     private int[] Grades;
     private double Average;
 
-    public static String getSubject() {
+    public Course(String subject) {
+
+    }
+
+    public String getSubject() {
         return Subject;
     }
 
@@ -40,7 +47,7 @@ public class Course {
         return Term;
     }
 
-    public static String getInstructor() {
+    public String getInstructor() {
         return Instructor;
     }
 

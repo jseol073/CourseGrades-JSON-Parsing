@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class CourseGradesTest {
@@ -17,6 +19,12 @@ public class CourseGradesTest {
             "    ]";
     private static Course firstJSONLine;
     private static Course[] courseArray;
+    public String fall2013 = Data.getFileContentsAsString(Data.JSON_FILES[0]);
+    public String fall2014 = Data.getFileContentsAsString(Data.JSON_FILES[1]);
+    public String spring2013 = Data.getFileContentsAsString(Data.JSON_FILES[2]);
+    public String spring2014 = Data.getFileContentsAsString(Data.JSON_FILES[3]);
+    public String summer2013 = Data.getFileContentsAsString(Data.JSON_FILES[4]);
+    public String summer2014 = Data.getFileContentsAsString(Data.JSON_FILES[5]);
 
     @Before
     public void setUp() throws Exception {
@@ -64,6 +72,12 @@ public class CourseGradesTest {
     @Test
     public void getSubjectOfArray() {
         assertEquals("AAS", courseArray[2].getSubject());
+    }
+
+    @Test
+    public void turnFilesToArrayListTest() {
+        List<String> fileList = Data.getJsonFilesAsList();
+        assertEquals(firstCourse, CourseGrades.filesToList(fileList).get(0));
     }
 
 }

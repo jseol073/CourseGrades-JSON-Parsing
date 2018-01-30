@@ -21,24 +21,9 @@ public class Course {
     private double Average;
     private int numStudents;
 
+    //Default Constructor
     public Course(String subject) {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-                "CRN=" + CRN +
-                ", Subject='" + Subject + '\'' +
-                ", Number=" + Number +
-                ", Title='" + Title + '\'' +
-                ", Section='" + Section + '\'' +
-                ", Type='" + Type + '\'' +
-                ", Term=" + Term +
-                ", Instructor='" + Instructor + '\'' +
-                ", Grades=" + Arrays.toString(Grades) +
-                ", Average=" + Average +
-                '}';
     }
 
     public String getSubject() {
@@ -85,11 +70,28 @@ public class Course {
         return Average;
     }
 
+    // Get amount of students by finding the sum of the int[] gradeArray
     public int getNumStudents() {
         int[] gradeOfStudents = this.getGrades();
         // Got code below from https://stackoverflow.com/questions/4550662/how-do-you-find-the-sum-of-all-the-numbers-in-an-array-in-java
         int sumOfGrades = IntStream.of(gradeOfStudents).sum();
         return sumOfGrades;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "CRN=" + CRN +
+                ", Subject='" + Subject + '\'' +
+                ", Number=" + Number +
+                ", Title='" + Title + '\'' +
+                ", Section='" + Section + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Term=" + Term +
+                ", Instructor='" + Instructor + '\'' +
+                ", Grades=" + Arrays.toString(Grades) +
+                ", Average=" + Average +
+                '}';
     }
 
     @Override

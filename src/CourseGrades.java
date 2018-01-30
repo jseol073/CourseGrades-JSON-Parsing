@@ -11,6 +11,8 @@ public class CourseGrades {
     private Course course;
 
     // Converts all json files into a ArrayList of type Course
+    // @param fileList is the json file names in a String List
+    // @return List of Courses in type Course
     public static List<Course> filesToList(List<String> fileList) {
         Gson gson = new Gson();
         List<Course> courseList = new ArrayList<>();
@@ -36,17 +38,18 @@ public class CourseGrades {
         return subjectClassList;
     }
     
-    public List<Course> getInstructorCourses(List<Course> courseList, String instructorName) {
+    public static List<Course> getInstructorCourses(List<Course> courseList, String instructorName) {
         List<Course> instructorClassList = new ArrayList<>();
         for (int i = 0; i < courseList.size(); i++) {
-            if (courseList.get(i).getSubject().equals(instructorName)) {
+            if (courseList.get(i).getInstructor().equals(instructorName)) {
                 instructorClassList.add(courseList.get(i));
             }
         }
         return instructorClassList;
     }
 
-    public List<Course> getCoursesInRange(List<Course> courseList, int fromThisNumber, int toThisNumber) {
+    public static List<Course> getNumCoursesInRange(List<Course> courseList,
+                                                    int fromThisNumber, int toThisNumber) {
         List<Course> coursesInRange = new ArrayList<>();
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getNumber() >= fromThisNumber
@@ -57,10 +60,18 @@ public class CourseGrades {
         return coursesInRange;
     }
 
-//    public static void main(String[] args) {
-//        List<String> fileList = Data.getJsonFilesAsList();
-//        System.out.println(filesToList(fileList));
-//    }
+    public static List<Course> getNumStudentsWithinRange(List<Course> courseList,
+                                                         int fromRange, int toRange) {
+        List<Course> coursesInRange = new ArrayList<>();
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i).getNumStudents() >= fromRange
+                    && courseList.get(i).getNumStudents() <= toRange) {
+                coursesInRange.add(courseList.get(i));
+            }
+        }
+        return coursesInRange;
+    }
+
 
 }
 

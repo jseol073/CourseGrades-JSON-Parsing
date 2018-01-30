@@ -3,6 +3,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 
 public class Course {
@@ -16,7 +17,9 @@ public class Course {
     private int Term;
     private String Instructor;
     private int[] Grades;
+    private int Numbers;
     private double Average;
+    private int numStudents;
 
     public Course(String subject) {
 
@@ -74,8 +77,19 @@ public class Course {
         return Grades;
     }
 
+    public int getNumbers() {
+        return Numbers;
+    }
+
     public double getAverage() {
         return Average;
+    }
+
+    public int getNumStudents() {
+        int[] gradeOfStudents = this.getGrades();
+        // Got code below from https://stackoverflow.com/questions/4550662/how-do-you-find-the-sum-of-all-the-numbers-in-an-array-in-java
+        int sumOfGrades = IntStream.of(gradeOfStudents).sum();
+        return sumOfGrades;
     }
 
     @Override

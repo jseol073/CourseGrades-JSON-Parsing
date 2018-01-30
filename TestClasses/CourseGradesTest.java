@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
@@ -76,10 +77,22 @@ public class CourseGradesTest {
             "  { \"CRN\": 51932, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD6\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [12, 14, 2, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.83 },\n" +
             "  { \"CRN\": 58092, \"Subject\": \"AAS\", \"Number\": 287, \"Title\": \"Food and Asian Americans\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Manalansan, Martin F\", \"Grades\": [0, 23, 2, 4, 2, 3, 2, 0, 0, 0, 0, 0, 0, 1], \"Average\": 3.65 }]";
 
+    private final String onlySinghVijayInstructor = "[{ \"CRN\": 57478, \"Subject\": \"ABE\", \"Number\": 488, \"Title\": \"Bioprocessing Biomass for Fuel\", \"Section\": \"VS\", \"Type\": \"LEC\", \"Term\": 120138, \"Instructor\": \"Singh, Vijay\", \"Grades\": [0, 5, 9, 6, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0], \"Average\": 3.47 }]";
+    // Courses with number of students from 50 to 130
+    private final String numStudentsInRange = "[ " +
+            "{ \"CRN\": 31263, \"Subject\": \"ABE\", \"Number\": 100, \"Title\": \"Intro Agric & Biological Engrg\", \"Section\": \"B\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Green, Angela R\", \"Grades\": [0, 23, 0, 0, 22, 0, 0, 5, 0, 0, 3, 0, 2, 0], \"Average\": 3.11 }," +
+            "{ \"CRN\": 58927, \"Subject\": \"ABE\", \"Number\": 223, \"Title\": \"ABE Principles: Machine Syst\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Grift, Tony E\", \"Grades\": [8, 36, 3, 2, 3, 0, 0, 0, 0, 1, 1, 0, 0, 0], \"Average\": 3.8 }," +
+            "{ \"CRN\": 58931, \"Subject\": \"ABE\", \"Number\": 224, \"Title\": \"ABE Principles: Soil & Water\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Kalita, Prasanta K\", \"Grades\": [5, 32, 5, 1, 7, 0, 2, 3, 2, 0, 3, 0, 0, 0], \"Average\": 3.46 }," +
+            "{ \"CRN\": 36669, \"Subject\": \"ABE\", \"Number\": 430, \"Title\": \"Project Management\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120148, \"Instructor\": \"Schideman, Lance C\", \"Grades\": [1, 24, 11, 29, 48, 5, 4, 7, 1, 0, 0, 0, 0, 0], \"Average\": 3.23 }]";
+    // Using "Number : 386" as an example
+    private final String coursesInRangeEx = "[{ \"CRN\": 50021, \"Subject\": \"PS\", \"Number\": 386, \"Title\": \"International Law\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Diehl, Paul F\", \"Grades\": [0, 4, 5, 5, 20, 5, 6, 5, 3, 1, 1, 0, 0, 0], \"Average\": 2.83 }]";
     private static Course firstJSONLine;
     private static Course[] smallCourseArray;
     private static Course[] biggerCourseArray;
     private static Course[] onlyAASArray;
+    private static Course[] onlyVijaySinghArray;
+    private static Course[] courseInRangeArrayEx;
+    private static Course[] numStudentsInRangeArray;
     public String fall2013 = Data.getFileContentsAsString(Data.JSON_FILES[0]);
     public String fall2014 = Data.getFileContentsAsString(Data.JSON_FILES[1]);
     public String spring2013 = Data.getFileContentsAsString(Data.JSON_FILES[2]);
@@ -119,7 +132,7 @@ public class CourseGradesTest {
 
     @Test
     public void getAverageOfOneLine() {
-        assertEquals(100, firstJSONLine.getNumber());
+        assertEquals(3.72, firstJSONLine.getAverage(), 0.001);
     }
 
     @Test
@@ -158,6 +171,8 @@ public class CourseGradesTest {
         assertEquals(biggerCourseArray[40], CourseGrades.filesToList(fileList).get(40));
     }
 
+    // Step 3:
+
     // Testing if subject is "AAS" and see if output is all "AAS" courses
     @Test
     public void getSubjectCoursesTest() {
@@ -169,6 +184,47 @@ public class CourseGradesTest {
         String subject = "AAS";
         List<Course> onlySubjectClasses = new ArrayList<>(Arrays.asList(onlyAASArray));
         assertEquals(onlySubjectClasses, CourseGrades.getSubjectCourses(fall13Courses, subject));
+    }
+
+    @Test
+    public void getInstructorCoursesTest() {
+        Gson localgson = new Gson();
+        onlyVijaySinghArray = localgson.fromJson(onlySinghVijayInstructor, Course[].class);
+        List<String> fall13CoursesInStr = new ArrayList<>();
+        fall13CoursesInStr.add("Fall2013.json");
+        List<Course> fall13Courses = CourseGrades.filesToList(fall13CoursesInStr);
+        String instructorName = "Singh, Vijay";
+        List<Course> onlyInstructorClasses = new ArrayList<>(Arrays.asList(onlyVijaySinghArray));
+        assertEquals(onlyInstructorClasses,
+                CourseGrades.getInstructorCourses(fall13Courses, instructorName));
+    }
+
+    @Test
+    public void getNumCoursesWithinRangeTest() {
+        Gson localgson = new Gson();
+        courseInRangeArrayEx = localgson.fromJson(coursesInRangeEx, Course[].class);
+        List<String> fall13CoursesInStr = new ArrayList<>();
+        fall13CoursesInStr.add("Fall2013.json");
+        List<Course> fall13Courses = CourseGrades.filesToList(fall13CoursesInStr);
+        int fromRange = 386;
+        int toRange = 386;
+        List<Course> coursesWithinRangeList = new ArrayList<>(Arrays.asList(courseInRangeArrayEx));
+        assertEquals(coursesWithinRangeList,
+                CourseGrades.getNumCoursesInRange(fall13Courses, fromRange, toRange));
+    }
+
+    @Test
+    public void getNumStudentCoursesWithinRangeTest() {
+        Gson localgson = new Gson();
+        numStudentsInRangeArray = localgson.fromJson(numStudentsInRange, Course[].class);
+        List<String> testJSONFileInStr = new ArrayList<>();
+        testJSONFileInStr.add("TestCourses.json");
+        List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
+        List<Course> coursesNumStudentRange = new ArrayList<>(Arrays.asList(numStudentsInRangeArray));
+        int fromRange = 50;
+        int toRange = 130;
+        assertEquals(coursesNumStudentRange, CourseGrades.getNumStudentsWithinRange(testJSONFile, fromRange, toRange));
+
     }
 
 }

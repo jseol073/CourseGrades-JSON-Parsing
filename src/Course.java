@@ -1,6 +1,9 @@
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 
 public class Course {
     @SerializedName("CRN")
@@ -17,6 +20,22 @@ public class Course {
 
     public Course(String subject) {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "CRN=" + CRN +
+                ", Subject='" + Subject + '\'' +
+                ", Number=" + Number +
+                ", Title='" + Title + '\'' +
+                ", Section='" + Section + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Term=" + Term +
+                ", Instructor='" + Instructor + '\'' +
+                ", Grades=" + Arrays.toString(Grades) +
+                ", Average=" + Average +
+                '}';
     }
 
     public String getSubject() {
@@ -57,5 +76,30 @@ public class Course {
 
     public double getAverage() {
         return Average;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return CRN == course.CRN &&
+                Number == course.Number &&
+                Term == course.Term &&
+                Double.compare(course.Average, Average) == 0 &&
+                Objects.equals(Subject, course.Subject) &&
+                Objects.equals(Title, course.Title) &&
+                Objects.equals(Section, course.Section) &&
+                Objects.equals(Type, course.Type) &&
+                Objects.equals(Instructor, course.Instructor) &&
+                Arrays.equals(Grades, course.Grades);
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = Objects.hash(CRN, Subject, Number, Title, Section, Type, Term, Instructor, Average);
+        result = 31 * result + Arrays.hashCode(Grades);
+        return result;
     }
 }

@@ -9,16 +9,24 @@ import java.util.stream.IntStream;
 public class Course {
     @SerializedName("CRN")
     private int CRN;
-    private String Subject;
-    private int Number;
-    private String Title;
-    private String Section;
-    private String Type;
-    private int Term;
-    private String Instructor;
-    private int[] Grades;
-    private int Numbers;
-    private double Average;
+    @SerializedName("Subject")
+    private String subject;
+    @SerializedName("Number")
+    private int number;
+    @SerializedName("Title")
+    private String title;
+    @SerializedName("Section")
+    private String section;
+    @SerializedName("Type")
+    private String type;
+    @SerializedName("Term")
+    private int term;
+    @SerializedName("Instructor")
+    private String instructor;
+    @SerializedName("Grades")
+    private int[] grades;
+    @SerializedName("Average")
+    private double average;
     private int numStudents;
 
     //Default Constructor
@@ -27,7 +35,7 @@ public class Course {
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public int getCRN() {
@@ -35,39 +43,35 @@ public class Course {
     }
 
     public int getNumber() {
-        return Number;
+        return number;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public String getSection() {
-        return Section;
+        return section;
     }
 
     public String getType() {
-        return Type;
+        return type;
     }
 
     public int getTerm() {
-        return Term;
+        return term;
     }
 
     public String getInstructor() {
-        return Instructor;
+        return instructor;
     }
 
     public int[] getGrades() {
-        return Grades;
-    }
-
-    public int getNumbers() {
-        return Numbers;
+        return grades;
     }
 
     public double getAverage() {
-        return Average;
+        return average;
     }
 
     // Get amount of students by finding the sum of the int[] gradeArray
@@ -82,15 +86,15 @@ public class Course {
     public String toString() {
         return "Course{" +
                 "CRN=" + CRN +
-                ", Subject='" + Subject + '\'' +
-                ", Number=" + Number +
-                ", Title='" + Title + '\'' +
-                ", Section='" + Section + '\'' +
-                ", Type='" + Type + '\'' +
-                ", Term=" + Term +
-                ", Instructor='" + Instructor + '\'' +
-                ", Grades=" + Arrays.toString(Grades) +
-                ", Average=" + Average +
+                ", Subject='" + subject + '\'' +
+                ", Number=" + number +
+                ", Title='" + title + '\'' +
+                ", Section='" + section + '\'' +
+                ", Type='" + type + '\'' +
+                ", Term=" + term +
+                ", Instructor='" + instructor + '\'' +
+                ", Grades=" + Arrays.toString(grades) +
+                ", Average=" + average +
                 '}';
     }
 
@@ -100,22 +104,22 @@ public class Course {
         if (o == null || getClass() != o.getClass()) return false;
         Course course = (Course) o;
         return CRN == course.CRN &&
-                Number == course.Number &&
-                Term == course.Term &&
-                Double.compare(course.Average, Average) == 0 &&
-                Objects.equals(Subject, course.Subject) &&
-                Objects.equals(Title, course.Title) &&
-                Objects.equals(Section, course.Section) &&
-                Objects.equals(Type, course.Type) &&
-                Objects.equals(Instructor, course.Instructor) &&
-                Arrays.equals(Grades, course.Grades);
+                number == course.number &&
+                term == course.term &&
+                Double.compare(course.average, average) == 0 &&
+                Objects.equals(subject, course.subject) &&
+                Objects.equals(title, course.title) &&
+                Objects.equals(section, course.section) &&
+                Objects.equals(type, course.type) &&
+                Objects.equals(instructor, course.instructor) &&
+                Arrays.equals(grades, course.grades);
     }
 
     @Override
     public int hashCode() {
 
-        int result = Objects.hash(CRN, Subject, Number, Title, Section, Type, Term, Instructor, Average);
-        result = 31 * result + Arrays.hashCode(Grades);
+        int result = Objects.hash(CRN, subject, number, title, section, type, term, instructor, average);
+        result = 31 * result + Arrays.hashCode(grades);
         return result;
     }
 }

@@ -58,8 +58,8 @@ public class CourseGrades {
     // @param fromThisNumber is an int value of the min course number
     // @param toThisNumber is an int value of max course number
     // @return ArrayList of courses that correspond within the range
-    public static List<Course> getNumCoursesInRange(List<Course> courseList,
-                                                    int fromThisNumber, int toThisNumber) {
+    public static List<Course> getNumberCoursesInRange(List<Course> courseList,
+                                                       int fromThisNumber, int toThisNumber) {
         List<Course> coursesInRange = new ArrayList<>();
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getNumber() >= fromThisNumber
@@ -74,8 +74,8 @@ public class CourseGrades {
     // @param fromRange is the int amount of students from starting range
     // @param toRange is the int amount of students to ending range
     // @return ArrayList of courses that correspond within the range of the amount of students
-    public static List<Course> getNumStudentsWithinRange(List<Course> courseList,
-                                                         int fromRange, int toRange) {
+    public static List<Course> getAmountStudentsWithinRange(List<Course> courseList,
+                                                            int fromRange, int toRange) {
         List<Course> coursesInRange = new ArrayList<>();
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getNumStudents() >= fromRange
@@ -103,8 +103,8 @@ public class CourseGrades {
     // @param fromRange is a double value of min GPA
     // @param toRange is a double value of max GPA
     // @return ArrayList of courses that correspond within the range of the GPA value
-    public static List<Course> getNumGPAWithinRange(List<Course> courseList,
-                                                         double fromRange, double toRange) {
+    public static List<Course> getAmountOfStudentsGPAWithinRange(List<Course> courseList,
+                                                                 double fromRange, double toRange) {
         List<Course> coursesGPAInRange = new ArrayList<>();
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getAverage() >= fromRange
@@ -119,7 +119,7 @@ public class CourseGrades {
 
     // @param collectionOfCourses is a list of type Course
     // @return int which is the value of the amount of students on the courseList
-    public static int getNumStudentsOfCourse(List<Course> collectionOfCourses) {
+    public static int getAmountStudentsOfCourse(List<Course> collectionOfCourses) {
         int totalStudentsInCourseList = 0;
         for (int i = 0; i < collectionOfCourses.size(); i++) {
             totalStudentsInCourseList += collectionOfCourses.get(i).getNumStudents();
@@ -127,11 +127,12 @@ public class CourseGrades {
         return totalStudentsInCourseList;
     }
 
+    // Helper method for getAmountOfStudentsWithinGradeRange
     // @param gradeArray is an array of the how many students got each grade
     // @param fromRange is an int which is the index of the starting range
     // @param toRange is an int which the index of the ending range
     // @return int which is the value of the amount of students on a given range of the gradeArray
-    public static int getNumGradeRange(int[] gradeArray, int fromRange, int toRange) {
+    public static int getStudentsInGradeArrWithinRange(int[] gradeArray, int fromRange, int toRange) {
         int getNumStudents = 0;
         for (int i = fromRange; i < toRange + 1; i++) {
             getNumStudents += gradeArray[i];
@@ -143,9 +144,10 @@ public class CourseGrades {
     // @param fromRange is a String of the grade mark which is turned into the index of the starting range
     // @param toRange is a String of the grade mark which is turned into the index of the ending range
     // @return int which is the value of the amount of students on a given range of the courseList
-    public static int getNumStudentGradeRange(List<Course> collectionOfCourses,
-                                              String fromRange, String toRange) {
-        String[] gradeMarkArray = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F", "W"};
+    public static int getAmountOfStudentsWithinGradeRange(List<Course> collectionOfCourses,
+                                                          String fromRange, String toRange) {
+        String[] gradeMarkArray =
+                {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F", "W"};
         int indexOfFromRange = 0;
         int indexOfToRange = 0;
         int numStudents = 0;
@@ -159,7 +161,8 @@ public class CourseGrades {
             }
         }
         for (int i = 0; i < collectionOfCourses.size(); i++) {
-            numStudents += getNumGradeRange(collectionOfCourses.get(i).getGrades(), indexOfFromRange, indexOfToRange);
+            numStudents += getStudentsInGradeArrWithinRange(collectionOfCourses.get(i).getGrades(),
+                    indexOfFromRange, indexOfToRange);
         }
         return numStudents;
     }
@@ -168,12 +171,12 @@ public class CourseGrades {
     // @return the average GPA (double) of the courses on the list
     public static double getAverageGPA(List<Course> collectionOfCourses) {
         double sumGPA = 0.0;
-        int Listlength = 0;
+        int listLength = 0;
         for (int i = 0; i < collectionOfCourses.size(); i++) {
             sumGPA += collectionOfCourses.get(i).getAverage();
-            Listlength++;
+            listLength++;
         }
-        double averageGPA = sumGPA/Listlength;
+        double averageGPA = sumGPA/listLength;
         return averageGPA;
     }
 

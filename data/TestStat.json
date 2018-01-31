@@ -1,0 +1,8 @@
+[
+  { "CRN": 30452, "Subject": "STAT", "Number": 100, "Title": "Statistics", "Section": "K1", "Type": "LCD", "Term": 120145, "Instructor": "Eisinger, Robert D", "Grades": [5, 7, 3, 1, 2, 2, 2, 1, 5, 1, 2, 0, 0, 0], "Average": 2.97 },
+  { "CRN": 36918, "Subject": "STAT", "Number": 100, "Title": "Statistics", "Section": "ONL", "Type": "ONL", "Term": 120145, "Instructor": "Ye, Sangbeak", "Grades": [7, 35, 7, 8, 4, 7, 2, 4, 2, 0, 2, 2, 11, 2], "Average": 2.97 },
+  { "CRN": 30460, "Subject": "STAT", "Number": 400, "Title": "Statistics and Probability I", "Section": "AL1", "Type": "LEC", "Term": 120145, "Instructor": "Stepanov, Alexey G", "Grades": [23, 9, 9, 4, 8, 3, 1, 2, 3, 0, 3, 0, 3, 1], "Average": 3.25 },
+  { "CRN": 33498, "Subject": "STAT", "Number": 410, "Title": "Statistics and Probability II", "Section": "G1G", "Type": "LEC", "Term": 120145, "Instructor": "Stepanov, Alexey G", "Grades": [12, 6, 4, 6, 11, 4, 0, 2, 2, 0, 2, 2, 2, 2], "Average": 3.11 },
+  { "CRN": 34304, "Subject": "STAT", "Number": 440, "Title": "Statistical Data Management", "Section": "N1G", "Type": "LEC", "Term": 120145, "Instructor": "Unger, David", "Grades": [2, 11, 5, 3, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0], "Average": 3.59 },
+  { "CRN": 37298, "Subject": "STAT", "Number": 448, "Title": "Advanced Data Analysis", "Section": "S1", "Type": "LCD", "Term": 120145, "Instructor": "Glosemeyer, Darren W", "Grades": [0, 11, 7, 4, 2, 4, 0, 0, 0, 0, 0, 0, 2, 0], "Average": 3.32 }
+]

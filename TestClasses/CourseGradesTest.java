@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.google.gson.Gson;
@@ -11,16 +10,17 @@ import static org.junit.Assert.*;
 
 public class CourseGradesTest {
 
-    private static final String firstCourse = "{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": " +
+    private static final String FIRST_COURSE =
+            "{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": " +
             "\"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": " +
             "\"Arai, Sayuri\", \"Grades\": [6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 }";
 
-    private final String firstThreeCourses = "[\n" +
+    private final String FIRST_THREE_COURSES = "[\n" +
             "    { \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 },\n" +
             "    { \"CRN\": 47100, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD2\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 11, 4, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.64 },\n" +
             "    { \"CRN\": 47102, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD3\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Davis, Thomas E\", \"Grades\": [2, 24, 1, 2, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.75 },\n" +
             "    ]";
-    private final String moreCourses = "[\n" +
+    private final String MORE_COURSES = "[\n" +
             "  { \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 },\n" +
             "  { \"CRN\": 47100, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD2\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 11, 4, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.64 },\n" +
             "  { \"CRN\": 47102, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD3\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Davis, Thomas E\", \"Grades\": [2, 24, 1, 2, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.75 },\n" +
@@ -69,7 +69,8 @@ public class CourseGradesTest {
             "  { \"CRN\": 36598, \"Subject\": \"ACCY\", \"Number\": 301, \"Title\": \"Atg Measurement & Disclosure\", \"Section\": \"AE8\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Jackson, Kevin\", \"Grades\": [0, 5, 13, 5, 8, 5, 0, 1, 0, 0, 0, 0, 2, 0], \"Average\": 3.17 },\n" +
             "  { \"CRN\": 49255, \"Subject\": \"ACCY\", \"Number\": 301, \"Title\": \"Atg Measurement & Disclosure\", \"Section\": \"AEB\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Asante Appiah, Bright\", \"Grades\": [1, 4, 13, 9, 5, 6, 0, 0, 1, 0, 0, 0, 1, 0], \"Average\": 3.26 },\n" +
             "  ]";
-    private final String onlyAAS = "[{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 },\n" +
+    private final String ONLY_AAS =
+            " [{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 },\n" +
             "  { \"CRN\": 47100, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD2\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Arai, Sayuri\", \"Grades\": [6, 11, 4, 5, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.64 },\n" +
             "  { \"CRN\": 47102, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD3\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Davis, Thomas E\", \"Grades\": [2, 24, 1, 2, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.75 },\n" +
             "  { \"CRN\": 51248, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD4\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Davis, Thomas E\", \"Grades\": [7, 16, 4, 4, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.71 },\n" +
@@ -77,25 +78,28 @@ public class CourseGradesTest {
             "  { \"CRN\": 51932, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD6\", \"Type\": \"DIS\", \"Term\": 120138, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [12, 14, 2, 2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.83 },\n" +
             "  { \"CRN\": 58092, \"Subject\": \"AAS\", \"Number\": 287, \"Title\": \"Food and Asian Americans\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Manalansan, Martin F\", \"Grades\": [0, 23, 2, 4, 2, 3, 2, 0, 0, 0, 0, 0, 0, 1], \"Average\": 3.65 }]";
 
-    private final String onlySinghVijayInstructor = "[{ \"CRN\": 57478, \"Subject\": \"ABE\", \"Number\": 488, \"Title\": \"Bioprocessing Biomass for Fuel\", \"Section\": \"VS\", \"Type\": \"LEC\", \"Term\": 120138, \"Instructor\": \"Singh, Vijay\", \"Grades\": [0, 5, 9, 6, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0], \"Average\": 3.47 }]";
-
+    private final String ONLY_SINGH_VIJAY_INSTRUCTOR =
+            "[{ \"CRN\": 57478, \"Subject\": \"ABE\", \"Number\": 488, \"Title\": \"Bioprocessing Biomass for Fuel\", \"Section\": \"VS\", \"Type\": \"LEC\", \"Term\": 120138, \"Instructor\": \"Singh, Vijay\", \"Grades\": [0, 5, 9, 6, 2, 0, 1, 1, 0, 0, 0, 0, 0, 0], \"Average\": 3.47 }]";
+    private final String COURSES_BY_SAME_INSTRUCTOR_STR =
+            "[{ \"CRN\": 30460, \"Subject\": \"STAT\", \"Number\": 400, \"Title\": \"Statistics and Probability I\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [23, 9, 9, 4, 8, 3, 1, 2, 3, 0, 3, 0, 3, 1], \"Average\": 3.25 },\n" +
+            " { \"CRN\": 33498, \"Subject\": \"STAT\", \"Number\": 410, \"Title\": \"Statistics and Probability II\", \"Section\": \"G1G\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [12, 6, 4, 6, 11, 4, 0, 2, 2, 0, 2, 2, 2, 2], \"Average\": 3.11 }" +
+            "]";
     // Courses with number of students from 50 to 130
-    private final String numStudentsInRange = "[ " +
+    private final String COURSES_OF_STUDENTS_IN_RANGE = "[ " +
             "{ \"CRN\": 31263, \"Subject\": \"ABE\", \"Number\": 100, \"Title\": \"Intro Agric & Biological Engrg\", \"Section\": \"B\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Green, Angela R\", \"Grades\": [0, 23, 0, 0, 22, 0, 0, 5, 0, 0, 3, 0, 2, 0], \"Average\": 3.11 }," +
             "{ \"CRN\": 58927, \"Subject\": \"ABE\", \"Number\": 223, \"Title\": \"ABE Principles: Machine Syst\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Grift, Tony E\", \"Grades\": [8, 36, 3, 2, 3, 0, 0, 0, 0, 1, 1, 0, 0, 0], \"Average\": 3.8 }," +
             "{ \"CRN\": 58931, \"Subject\": \"ABE\", \"Number\": 224, \"Title\": \"ABE Principles: Soil & Water\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Kalita, Prasanta K\", \"Grades\": [5, 32, 5, 1, 7, 0, 2, 3, 2, 0, 3, 0, 0, 0], \"Average\": 3.46 }," +
             "{ \"CRN\": 36669, \"Subject\": \"ABE\", \"Number\": 430, \"Title\": \"Project Management\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120148, \"Instructor\": \"Schideman, Lance C\", \"Grades\": [1, 24, 11, 29, 48, 5, 4, 7, 1, 0, 0, 0, 0, 0], \"Average\": 3.23 }]";
-    // Using "Number : 386" as an example
-    private final String coursesInRangeEx = "[{ \"CRN\": 50021, \"Subject\": \"PS\", \"Number\": 386, \"Title\": \"International Law\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Diehl, Paul F\", \"Grades\": [0, 4, 5, 5, 20, 5, 6, 5, 3, 1, 1, 0, 0, 0], \"Average\": 2.83 }]";
 
-    private final String coursesOfSameTitleInStr = "[{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [2, 7, 4, 4, 5, 1, 2, 2, 0, 0, 0, 1, 2, 0], \"Average\": 3.03 }, //30 students\n" +
+    private final String COURSE_OF_SAME_TITLE_STR =
+            " [{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [2, 7, 4, 4, 5, 1, 2, 2, 0, 0, 0, 1, 2, 0], \"Average\": 3.03 }, //30 students\n" +
             "  { \"CRN\": 47100, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD2\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [6, 19, 2, 2, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0], \"Average\": 3.69 }, //33 students\n" +
             "  { \"CRN\": 47102, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD3\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Peralta, Christine N\", \"Grades\": [2, 15, 6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 }, //29 students\n" +
             "  { \"CRN\": 51248, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD4\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Peralta, Christine N\", \"Grades\": [1, 14, 7, 5, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], \"Average\": 3.58 }, //31 students\n" +
             "  { \"CRN\": 51249, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD5\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Lee, Sang S\", \"Grades\": [3, 11, 4, 3, 6, 2, 0, 1, 1, 0, 0, 1, 0, 0], \"Average\": 3.39 }, //32 students\n" +
             "  { \"CRN\": 51932, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD6\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Lee, Sang S\", \"Grades\": [2, 9, 4, 5, 4, 2, 0, 4, 0, 0, 0, 0, 1, 0], \"Average\": 3.25 }]";
     // courses with GPA (3.20-3.72)
-    private final String coursesOfGPARange =
+    private final String COURSES_GPA_RANGE_EX =
             "[ { \"CRN\": 47100, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD2\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [6, 19, 2, 2, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0], \"Average\": 3.69 }, \n" +
             "  { \"CRN\": 47102, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD3\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Peralta, Christine N\", \"Grades\": [2, 15, 6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0], \"Average\": 3.72 }, \n" +
             "  { \"CRN\": 51248, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD4\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Peralta, Christine N\", \"Grades\": [1, 14, 7, 5, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], \"Average\": 3.58 }, \n" +
@@ -106,71 +110,91 @@ public class CourseGradesTest {
             "  { \"CRN\": 36669, \"Subject\": \"ABE\", \"Number\": 430, \"Title\": \"Project Management\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120148, \"Instructor\": \"Schideman, Lance C\", \"Grades\": [1, 24, 11, 29, 48, 5, 4, 7, 1, 0, 0, 0, 0, 0], \"Average\": 3.23 }, \n" +
             "  { \"CRN\": 31280, \"Subject\": \"ABE\", \"Number\": 466, \"Title\": \"Engineering Off-Road Vehicles\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Hansen, Alan C\", \"Grades\": [0, 4, 11, 8, 6, 2, 1, 2, 0, 0, 0, 0, 1, 0], \"Average\": 3.22 }, \n" +
             "  { \"CRN\": 57478, \"Subject\": \"ABE\", \"Number\": 488, \"Title\": \"Bioprocessing Biomass for Fuel\", \"Section\": \"VS\", \"Type\": \"LEC\", \"Term\": 120148, \"Instructor\": \"Singh, Vijay\", \"Grades\": [3, 4, 6, 7, 3, 4, 0, 1, 1, 0, 0, 0, 0, 1], \"Average\": 3.33 }]";
-    private static Course firstJSONLine;
-    private static Course[] smallCourseArray;
-    private static Course[] biggerCourseArray;
-    private static Course[] onlyAASArray;
-    private static Course[] onlyVijaySinghArray;
-    private static Course[] courseInRangeArrayEx;
+    private final String FIRST_LINE_OF_FALL_2014 =
+            "{ \"CRN\": 41758, \"Subject\": \"AAS\", \"Number\": 100, \"Title\": \"Intro Asian American Studies\", \"Section\": \"AD1\", \"Type\": \"DIS\", \"Term\": 120148, \"Instructor\": \"Thomas, Merin A\", \"Grades\": [2, 7, 4, 4, 5, 1, 2, 2, 0, 0, 0, 1, 2, 0], \"Average\": 3.03 }";
+    private final String ONLY_STAT_STR = "[{ \"CRN\": 30452, \"Subject\": \"STAT\", \"Number\": 100, \"Title\": \"Statistics\", \"Section\": \"K1\", \"Type\": \"LCD\", \"Term\": 120145, \"Instructor\": \"Eisinger, Robert D\", \"Grades\": [5, 7, 3, 1, 2, 2, 2, 1, 5, 1, 2, 0, 0, 0], \"Average\": 2.97 },\n" +
+            "  { \"CRN\": 36918, \"Subject\": \"STAT\", \"Number\": 100, \"Title\": \"Statistics\", \"Section\": \"ONL\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Ye, Sangbeak\", \"Grades\": [7, 35, 7, 8, 4, 7, 2, 4, 2, 0, 2, 2, 11, 2], \"Average\": 2.97 },\n" +
+            "  { \"CRN\": 30460, \"Subject\": \"STAT\", \"Number\": 400, \"Title\": \"Statistics and Probability I\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [23, 9, 9, 4, 8, 3, 1, 2, 3, 0, 3, 0, 3, 1], \"Average\": 3.25 },\n" +
+            "  { \"CRN\": 33498, \"Subject\": \"STAT\", \"Number\": 410, \"Title\": \"Statistics and Probability II\", \"Section\": \"G1G\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [12, 6, 4, 6, 11, 4, 0, 2, 2, 0, 2, 2, 2, 2], \"Average\": 3.11 },\n" +
+            "  { \"CRN\": 34304, \"Subject\": \"STAT\", \"Number\": 440, \"Title\": \"Statistical Data Management\", \"Section\": \"N1G\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Unger, David\", \"Grades\": [2, 11, 5, 3, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0], \"Average\": 3.59 },\n" +
+            "  { \"CRN\": 37298, \"Subject\": \"STAT\", \"Number\": 448, \"Title\": \"Advanced Data Analysis\", \"Section\": \"S1\", \"Type\": \"LCD\", \"Term\": 120145, \"Instructor\": \"Glosemeyer, Darren W\", \"Grades\": [0, 11, 7, 4, 2, 4, 0, 0, 0, 0, 0, 0, 2, 0], \"Average\": 3.32 }]";
+    // Using "Number : 386" as an example
+    private final String COURSES_IN_NUM_RANGE_STR = "[{ \"CRN\": 50021, \"Subject\": \"PS\", \"Number\": 386, \"Title\": \"International Law\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120138, \"Instructor\": \"Diehl, Paul F\", \"Grades\": [0, 4, 5, 5, 20, 5, 6, 5, 3, 1, 1, 0, 0, 0], \"Average\": 2.83 }]";
+    // Second example to the one above
+    private final String COURSE_OF_SAME_TITLE_STR_2 =
+            " [{ \"CRN\": 31389, \"Subject\": \"SPED\", \"Number\": 117, \"Title\": \"The Culture of Disability\", \"Section\": \"A\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Bentz, Johnell L\", \"Grades\": [0, 22, 0, 0, 5, 0, 0, 2, 0, 0, 1, 0, 2, 0], \"Average\": 3.38 },\n" +
+            "  { \"CRN\": 36271, \"Subject\": \"SPED\", \"Number\": 322, \"Title\": \"Intro Intellectual Disability\", \"Section\": \"A\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Wolowiec-Fisher, Kimberly\", \"Grades\": [3, 13, 0, 0, 8, 0, 0, 5, 0, 0, 1, 0, 2, 0], \"Average\": 3.09 },\n" +
+            "  { \"CRN\": 30452, \"Subject\": \"STAT\", \"Number\": 100, \"Title\": \"Statistics\", \"Section\": \"K1\", \"Type\": \"LCD\", \"Term\": 120145, \"Instructor\": \"Eisinger, Robert D\", \"Grades\": [5, 7, 3, 1, 2, 2, 2, 1, 5, 1, 2, 0, 0, 0], \"Average\": 2.97 },\n" +
+            "  { \"CRN\": 36918, \"Subject\": \"STAT\", \"Number\": 100, \"Title\": \"Statistics\", \"Section\": \"ONL\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Ye, Sangbeak\", \"Grades\": [7, 35, 7, 8, 4, 7, 2, 4, 2, 0, 2, 2, 11, 2], \"Average\": 2.97 },\n" +
+            "  { \"CRN\": 30460, \"Subject\": \"STAT\", \"Number\": 400, \"Title\": \"Statistics and Probability I\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [23, 9, 9, 4, 8, 3, 1, 2, 3, 0, 3, 0, 3, 1], \"Average\": 3.25 },\n" +
+            "  { \"CRN\": 33498, \"Subject\": \"STAT\", \"Number\": 410, \"Title\": \"Statistics and Probability II\", \"Section\": \"G1G\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Stepanov, Alexey G\", \"Grades\": [12, 6, 4, 6, 11, 4, 0, 2, 2, 0, 2, 2, 2, 2], \"Average\": 3.11 },\n" +
+            "  { \"CRN\": 34304, \"Subject\": \"STAT\", \"Number\": 440, \"Title\": \"Statistical Data Management\", \"Section\": \"N1G\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Unger, David\", \"Grades\": [2, 11, 5, 3, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0], \"Average\": 3.59 },\n" +
+            "  { \"CRN\": 37298, \"Subject\": \"STAT\", \"Number\": 448, \"Title\": \"Advanced Data Analysis\", \"Section\": \"S1\", \"Type\": \"LCD\", \"Term\": 120145, \"Instructor\": \"Glosemeyer, Darren W\", \"Grades\": [0, 11, 7, 4, 2, 4, 0, 0, 0, 0, 0, 0, 2, 0], \"Average\": 3.32 },\n" +
+            "  { \"CRN\": 30463, \"Subject\": \"TAM\", \"Number\": 212, \"Title\": \"Introductory Dynamics\", \"Section\": \"C\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Sanders, John W\", \"Grades\": [9, 7, 2, 10, 5, 3, 1, 2, 2, 0, 0, 0, 0, 0], \"Average\": 3.35 },\n" +
+            "  { \"CRN\": 30464, \"Subject\": \"TAM\", \"Number\": 251, \"Title\": \"Introductory Solid Mechanics\", \"Section\": \"A\", \"Type\": \"LCD\", \"Term\": 120145, \"Instructor\": \"Rajarathinam, Robin Jepht\", \"Grades\": [2, 9, 5, 6, 3, 2, 1, 1, 1, 0, 1, 0, 1, 0], \"Average\": 3.24 },\n" +
+            "  { \"CRN\": 30468, \"Subject\": \"TAM\", \"Number\": 335, \"Title\": \"Introductory Fluid Mechanics\", \"Section\": \"AL1\", \"Type\": \"LEC\", \"Term\": 120145, \"Instructor\": \"Johnson, Blake E\", \"Grades\": [2, 2, 1, 2, 10, 4, 4, 7, 4, 0, 2, 1, 5, 0], \"Average\": 2.27 },\n" +
+            "  { \"CRN\": 30486, \"Subject\": \"THEA\", \"Number\": 101, \"Title\": \"Introduction to Theatre Arts\", \"Section\": \"A\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Morrissette, Jason W\", \"Grades\": [9, 17, 7, 0, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0], \"Average\": 3.64 },\n" +
+            "  { \"CRN\": 37856, \"Subject\": \"THEA\", \"Number\": 101, \"Title\": \"Introduction to Theatre Arts\", \"Section\": \"S1\", \"Type\": \"ONL\", \"Term\": 120145, \"Instructor\": \"Morrissette, Jason W\", \"Grades\": [12, 12, 3, 4, 3, 3, 1, 1, 1, 0, 0, 0, 2, 1], \"Average\": 3.41 }" +
+            "]";
+    private static Course firstF13Course;
+    private static Course firstF14Course;
+    private static Course[] smallCourseArr;
+    private static Course[] biggerCourseArr;
+    private static Course[] subjectAASArr;
+    private static Course[] instructorSinghArr;
+    private static Course[] coursesInNumRangeArr;
     private static Course[] numStudentsInRangeArray;
     private static Course[] coursesOfSameTitle;
     private static Course[] coursesOfGPARangeArray;
-    public String fall2013 = Data.getFileContentsAsString(Data.JSON_FILES[0]);
-    public String fall2014 = Data.getFileContentsAsString(Data.JSON_FILES[1]);
-    public String spring2013 = Data.getFileContentsAsString(Data.JSON_FILES[2]);
-    public String spring2014 = Data.getFileContentsAsString(Data.JSON_FILES[3]);
-    public String summer2013 = Data.getFileContentsAsString(Data.JSON_FILES[4]);
-    public String summer2014 = Data.getFileContentsAsString(Data.JSON_FILES[5]);
 
     @Before
     public void setUp() throws Exception {
         Gson gson = new Gson();
-        firstJSONLine = gson.fromJson(firstCourse, Course.class);
-        smallCourseArray = gson.fromJson(firstThreeCourses, Course[].class);
-        biggerCourseArray = gson.fromJson(moreCourses, Course[].class);
+        firstF13Course = gson.fromJson(FIRST_COURSE, Course.class);
+        smallCourseArr = gson.fromJson(FIRST_THREE_COURSES, Course[].class);
+        biggerCourseArr = gson.fromJson(MORE_COURSES, Course[].class);
     }
 
     // STEP 1: Parsing the JSON ****************************************************************************************
 
     @Test
     public void getSubjectOfOneLine() {
-        assertEquals("AAS", firstJSONLine.getSubject());
+        assertEquals("AAS", firstF13Course.getSubject());
     }
 
     @Test
     public void getInstructorNameOfOneLine() {
-        assertEquals("Arai, Sayuri", firstJSONLine.getInstructor());
+        assertEquals("Arai, Sayuri", firstF13Course.getInstructor());
     }
 
     @Test
     public void getCRNOfOneLine() {
-        assertEquals(41758, firstJSONLine.getCRN());
+        assertEquals(41758, firstF13Course.getCRN());
     }
 
     @Test
     public void getNumberOfOneLine() {
-        assertEquals(100, firstJSONLine.getNumber());
+        assertEquals(100, firstF13Course.getNumber());
     }
 
     @Test
     public void getAverageOfOneLine() {
-        assertEquals(3.72, firstJSONLine.getAverage(), 0.001);
+        assertEquals(3.72, firstF13Course.getAverage(), 0.001);
     }
 
     @Test
     public void getGradesOfOneLine() {
-        int[] grades = {6, 16, 5, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0};
-        assertEquals(grades, firstJSONLine.getGrades());
+        assertEquals(6, firstF13Course.getGrades()[0]);
     }
 
     @Test
     public void getCRNOfArray() {
-        assertEquals(47102, smallCourseArray[2].getCRN());
+        assertEquals(47102, smallCourseArr[2].getCRN());
     }
 
     @Test
     public void getSubjectOfArray() {
-        assertEquals("AAS", smallCourseArray[2].getSubject());
+        assertEquals("AAS", smallCourseArr[2].getSubject());
     }
 
     // STEP 2: Loading JSON from Files *********************************************************************************
@@ -178,19 +202,28 @@ public class CourseGradesTest {
     @Test
     public void turnFilesToArrayListFirstCourseTest() {
         List<String> fileList = Data.getJsonFilesAsList();
-        assertEquals(firstJSONLine, CourseGrades.filesToList(fileList).get(0));
+        assertEquals(firstF13Course, CourseGrades.filesToList(fileList).get(0));
     }
 
     @Test
     public void turnFilesToArrayListSmallRandomCourseTest() {
         List<String> fileList = Data.getJsonFilesAsList();
-        assertEquals(smallCourseArray[2], CourseGrades.filesToList(fileList).get(2));
+        assertEquals(smallCourseArr[2], CourseGrades.filesToList(fileList).get(2));
     }
 
     @Test
     public void turnFilesToArrayListBiggerRandomCourseTest() {
         List<String> fileList = Data.getJsonFilesAsList();
-        assertEquals(biggerCourseArray[40], CourseGrades.filesToList(fileList).get(40));
+        assertEquals(biggerCourseArr[40], CourseGrades.filesToList(fileList).get(40));
+    }
+
+    // Testing first line of the second file
+    @Test
+    public void turnFilesToArrayListNextFileCourseTest() {
+        Gson localGson = new Gson();
+        firstF14Course = localGson.fromJson(FIRST_LINE_OF_FALL_2014, Course.class);
+        List<String> fileList = Data.getJsonFilesAsList();
+        assertEquals(firstF14Course, CourseGrades.filesToList(fileList).get(2586));
     }
 
     // Step 3: Filtering Methods ***************************************************************************************
@@ -198,47 +231,111 @@ public class CourseGradesTest {
     // Testing if subject is "AAS" and see if output is all "AAS" courses
     @Test
     public void getSubjectCoursesTest() {
-        Gson localgson = new Gson();
-        onlyAASArray = localgson.fromJson(onlyAAS, Course[].class);
+        Gson localGson = new Gson();
+        subjectAASArr = localGson.fromJson(ONLY_AAS, Course[].class);
         List<String> fall13CoursesInStr = new ArrayList<>();
         fall13CoursesInStr.add("Fall2013.json");
         List<Course> fall13Courses = CourseGrades.filesToList(fall13CoursesInStr);
         String subject = "AAS";
-        List<Course> onlySubjectClasses = new ArrayList<>(Arrays.asList(onlyAASArray));
+        List<Course> onlySubjectClasses = new ArrayList<>(Arrays.asList(subjectAASArr));
         assertEquals(onlySubjectClasses, CourseGrades.getSubjectCourses(fall13Courses, subject));
     }
 
+    // Test for STAT subject which should take all of TestStat.json
     @Test
-    public void getInstructorCoursesTest() {
-        Gson localgson = new Gson();
-        onlyVijaySinghArray = localgson.fromJson(onlySinghVijayInstructor, Course[].class);
+    public void getSubjectCoursesAllListTest() {
+        Gson localGson = new Gson();
+        Course[] onlyStatArray = localGson.fromJson(ONLY_STAT_STR, Course[].class);
+        List<String> testStatStr = new ArrayList<>();
+        testStatStr.add("TestStat.json");
+        List<Course> testStatList = CourseGrades.filesToList(testStatStr);
+        String subject = "STAT";
+        List<Course> onlySubjectClasses = new ArrayList<>(Arrays.asList(onlyStatArray));
+        assertEquals(onlySubjectClasses, CourseGrades.getSubjectCourses(testStatList, subject));
+    }
+
+    @Test
+    public void getInstructorCoursesOneTest() {
+        Gson localGson = new Gson();
+        instructorSinghArr = localGson.fromJson(ONLY_SINGH_VIJAY_INSTRUCTOR, Course[].class);
         List<String> fall13CoursesInStr = new ArrayList<>();
         fall13CoursesInStr.add("Fall2013.json");
         List<Course> fall13Courses = CourseGrades.filesToList(fall13CoursesInStr);
         String instructorName = "Singh, Vijay";
-        List<Course> onlyInstructorClasses = new ArrayList<>(Arrays.asList(onlyVijaySinghArray));
+        List<Course> onlyInstructorClasses = new ArrayList<>(Arrays.asList(instructorSinghArr));
         assertEquals(onlyInstructorClasses,
                 CourseGrades.getInstructorCourses(fall13Courses, instructorName));
     }
 
     @Test
-    public void getNumCoursesWithinRangeTest() {
-        Gson localgson = new Gson();
-        courseInRangeArrayEx = localgson.fromJson(coursesInRangeEx, Course[].class);
+    public void getInstructorCoursesManyTest() {
+        Gson localGson = new Gson();
+        Course[] onlyStepanovArray = localGson.fromJson(COURSES_BY_SAME_INSTRUCTOR_STR, Course[].class);
+        List<String> testCourses2Str = new ArrayList<>();
+        testCourses2Str.add("TestCourses2.json");
+        List<Course> testCourses2 = CourseGrades.filesToList(testCourses2Str);
+        String instructorName = "Stepanov, Alexey G";
+        List<Course> onlyInstructorClasses = new ArrayList<>(Arrays.asList(onlyStepanovArray));
+        assertEquals(onlyInstructorClasses,
+                CourseGrades.getInstructorCourses(testCourses2, instructorName));
+    }
+
+    @Test
+    public void getInstructorCoursesEmptyTest() {
+        List<String> testCourses2Str = new ArrayList<>();
+        testCourses2Str.add("TestCourses2.json");
+        List<Course> testCourses2 = CourseGrades.filesToList(testCourses2Str);
+        String instructorName = "";
+        List<Course> onlyInstructorClasses = new ArrayList<>();
+        assertEquals(onlyInstructorClasses,
+                CourseGrades.getInstructorCourses(testCourses2, instructorName));
+    }
+
+
+    @Test
+    public void getNumCoursesInRangeSingleTest() {
+        Gson localGson = new Gson();
+        coursesInNumRangeArr = localGson.fromJson(COURSES_IN_NUM_RANGE_STR, Course[].class);
         List<String> fall13CoursesInStr = new ArrayList<>();
         fall13CoursesInStr.add("Fall2013.json");
         List<Course> fall13Courses = CourseGrades.filesToList(fall13CoursesInStr);
         int fromRange = 386;
         int toRange = 386;
-        List<Course> coursesWithinRangeList = new ArrayList<>(Arrays.asList(courseInRangeArrayEx));
+        List<Course> coursesWithinRangeList = new ArrayList<>(Arrays.asList(coursesInNumRangeArr));
         assertEquals(coursesWithinRangeList,
-                CourseGrades.getNumCoursesInRange(fall13Courses, fromRange, toRange));
+                CourseGrades.getNumberCoursesInRange(fall13Courses, fromRange, toRange));
     }
 
     @Test
-    public void getNumStudentCoursesWithinRangeTest() {
-        Gson localgson = new Gson();
-        numStudentsInRangeArray = localgson.fromJson(numStudentsInRange, Course[].class);
+    public void getNumCoursesInRangeManyTest() {
+        Gson localGson = new Gson();
+        Course[] courseInRangeArrayEx = localGson.fromJson(COURSE_OF_SAME_TITLE_STR_2, Course[].class);
+        List<String> testCoursesStr = new ArrayList<>();
+        testCoursesStr.add("TestCourses2.json");
+        List<Course> fall13Courses = CourseGrades.filesToList(testCoursesStr);
+        int fromRange = 100;
+        int toRange = 500;
+        List<Course> coursesWithinRangeList = new ArrayList<>(Arrays.asList(courseInRangeArrayEx));
+        assertEquals(coursesWithinRangeList,
+                CourseGrades.getNumberCoursesInRange(fall13Courses, fromRange, toRange));
+    }
+
+    @Test
+    public void getNumCoursesInRangeEmptyTest() {
+        List<String> testCourses2Str = new ArrayList<>();
+        testCourses2Str.add("TestCourses2.json");
+        List<Course> testCourses2 = CourseGrades.filesToList(testCourses2Str);
+        int fromRange = 0;
+        int toRange = 2;
+        List<Course> coursesWithinRangeList = new ArrayList<>();
+        assertEquals(coursesWithinRangeList,
+                CourseGrades.getNumberCoursesInRange(testCourses2, fromRange, toRange));
+    }
+
+    @Test
+    public void getNumStudentsWithinRangeMaxTest() {
+        Gson localGson = new Gson();
+        numStudentsInRangeArray = localGson.fromJson(COURSES_OF_STUDENTS_IN_RANGE, Course[].class);
         List<String> testJSONFileInStr = new ArrayList<>();
         testJSONFileInStr.add("TestCourses.json");
         List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
@@ -246,14 +343,26 @@ public class CourseGradesTest {
         int fromRange = 50;
         int toRange = 130;
         assertEquals(coursesNumStudentRange,
-                CourseGrades.getNumStudentsWithinRange(testJSONFile, fromRange, toRange));
+                CourseGrades.getAmountStudentsWithinRange(testJSONFile, fromRange, toRange));
+    }
+
+    @Test
+    public void getNumStudentsWithinRangeEmptyTest() {
+        List<String> testJSONFileInStr = new ArrayList<>();
+        testJSONFileInStr.add("TestCourses.json");
+        List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
+        List<Course> coursesNumStudentRange = new ArrayList<>();
+        int fromRange = 500;
+        int toRange = 600;
+        assertEquals(coursesNumStudentRange,
+                CourseGrades.getAmountStudentsWithinRange(testJSONFile, fromRange, toRange));
     }
 
     // Test to make sure all courses have the title : "Intro Asian American Studies"
     @Test
-    public void getTitleCourses() {
-        Gson localgson = new Gson();
-        coursesOfSameTitle = localgson.fromJson(coursesOfSameTitleInStr, Course[].class);
+    public void getTitleCoursesManyTest() {
+        Gson localGson = new Gson();
+        coursesOfSameTitle = localGson.fromJson(COURSE_OF_SAME_TITLE_STR, Course[].class);
         List<String> testCoursesInStr = new ArrayList<>();
         testCoursesInStr.add("TestCourses.json");
         List<Course> testCourses = CourseGrades.filesToList(testCoursesInStr);
@@ -263,9 +372,19 @@ public class CourseGradesTest {
     }
 
     @Test
-    public void getNumGPAWithinRangeTest() {
-        Gson localgson = new Gson();
-        coursesOfGPARangeArray = localgson.fromJson(coursesOfGPARange, Course[].class);
+    public void getTitleCoursesEmptyTest() {
+        List<String> testCoursesInStr = new ArrayList<>();
+        testCoursesInStr.add("TestCourses.json");
+        List<Course> testCourses = CourseGrades.filesToList(testCoursesInStr);
+        List<Course> emptyList = new ArrayList<>();
+        String title = "false subject";
+        assertEquals(emptyList, CourseGrades.getTitleCourses(testCourses, title));
+    }
+
+    @Test
+    public void getNumGPAWithinRangeMaxTest() {
+        Gson localGson = new Gson();
+        coursesOfGPARangeArray = localGson.fromJson(COURSES_GPA_RANGE_EX, Course[].class);
         List<String> testJSONFileInStr = new ArrayList<>();
         testJSONFileInStr.add("TestCourses.json");
         List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
@@ -273,7 +392,19 @@ public class CourseGradesTest {
         double fromRange = 3.20;
         double toRange = 3.72;
         assertEquals(coursesGPARange,
-                CourseGrades.getNumGPAWithinRange(testJSONFile, fromRange, toRange));
+                CourseGrades.getAmountOfStudentsGPAWithinRange(testJSONFile, fromRange, toRange));
+    }
+
+    @Test
+    public void getNumGPAWithinRangeEmptyTest() {
+        List<String> testJSONFileInStr = new ArrayList<>();
+        testJSONFileInStr.add("TestCourses.json");
+        List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
+        List<Course> emptyList = new ArrayList<>();
+        double fromRange = 5.00;
+        double toRange = 6.00;
+        assertEquals(emptyList,
+                CourseGrades.getAmountOfStudentsGPAWithinRange(testJSONFile, fromRange, toRange));
     }
 
     // STEP 4: Aggregation Methods *************************************************************************************
@@ -285,7 +416,7 @@ public class CourseGradesTest {
         testJSONFileInStr.add("TestCourses.json");
         List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
         int totalNumStudents = 606;
-        assertEquals(totalNumStudents, CourseGrades.getNumStudentsOfCourse(testJSONFile));
+        assertEquals(totalNumStudents, CourseGrades.getAmountStudentsOfCourse(testJSONFile));
     }
 
     // Test to find total number of students that have a D- to W in TestCourse.json
@@ -297,7 +428,21 @@ public class CourseGradesTest {
         int numStudentsWithinGradeRange = 11;
         String dMinus = "D-";
         String w = "W";
-        assertEquals(numStudentsWithinGradeRange, CourseGrades.getNumStudentGradeRange(testJSONFile, dMinus, w));
+        assertEquals(numStudentsWithinGradeRange,
+                CourseGrades.getAmountOfStudentsWithinGradeRange(testJSONFile, dMinus, w));
+    }
+
+    // Test to find total number of students that have a A+ to W in TestCourse.json
+    @Test
+    public void getNumStudentGradeRangeAllTest() {
+        List<String> testJSONFileInStr = new ArrayList<>();
+        testJSONFileInStr.add("TestCourses.json");
+        List<Course> testJSONFile = CourseGrades.filesToList(testJSONFileInStr);
+        int numStudentsWithinGradeRange = 606;
+        String dMinus = "A+";
+        String w = "W";
+        assertEquals(numStudentsWithinGradeRange,
+                CourseGrades.getAmountOfStudentsWithinGradeRange(testJSONFile, dMinus, w));
     }
 
     // Test to find the average GPA in TestCourses.json

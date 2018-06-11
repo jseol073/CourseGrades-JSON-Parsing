@@ -1,6 +1,7 @@
 /**
  * Created by johnseol on 1/26/18.
  */
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -176,7 +177,7 @@ public class CourseGrades {
             sumGPA += collectionOfCourses.get(i).getAverage();
             listLength++;
         }
-        double averageGPA = sumGPA/listLength;
+        double averageGPA = sumGPA / listLength;
         return averageGPA;
     }
 
